@@ -9,6 +9,7 @@ var specialCharacters = ["@", "$", "*", "!", "%", "&", "#", "?", ">", ".", "=", 
 
 var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
+
 // Create a prompt function to ask for options
 function passwordOptions() {
   let length = parseInt(prompt('How many characters in your password. Stay between 8 and 128.'));
@@ -19,10 +20,12 @@ function passwordOptions() {
       //put a message here letting user know that password needs to be a number using alert('put message here')
     return null;
   }
-  let lowerCaseConfirm = confirm("Yes I want lowercase");
-  let upperCaseConfirm = confirm("Yes I want uppercase");
-  let specialCharactersConfirm = confirm("Yes I want special characters");
-  let numbersConfirm = confirm("Yes I want numbers");
+    
+  
+    let lowerCaseConfirm = confirm("Yes I want lowercase");
+    let upperCaseConfirm = confirm("Yes I want uppercase");
+    let specialCharactersConfirm = confirm("Yes I want special characters");
+    let numbersConfirm = confirm("Yes I want numbers");
   
   //conditional to check if user doesn't want any types of characters
 
@@ -32,57 +35,73 @@ function passwordOptions() {
     return null;
   }
 //object store to user input for length and other characters options
-  let passwordCriteria = {
-    length: length,
-    lowerCaseConfirm: lowerCaseConfirm,
-    upperCaseConfirm: upperCaseConfirm,
-    specialCharactersConfirm: specialCharactersConfirm,
-    numbersConfirm: numbersConfirm,
+    let passwordCriteria = {
+
+      lowerCaseConfirm: lowerCaseConfirm,
+      upperCaseConfirm: upperCaseConfirm,
+      specialCharactersConfirm: specialCharactersConfirm,
+      numbersConfirm: numbersConfirm,
+      length: length,
+    }
+    return passwordCriteria;
   }
-  return passwordCriteria
-}
 
 
 //function to generate random element in array
-function generatePassword() {
+// function generatePassword() {
+
+//   let lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+//   let upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+//   let specialCharacters = ["@", "$", "*", "!", "%", "&", "#", "?", ">", ".", "=", "+", "(", "-", ")", "<", "/", "\\", ";", "[", "]", ":", "{", "}", "|", "“", "’", "_"];
+//   let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   
-}
+//   return generatePassword
+// }
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
+  
 
   passwordText.value = password;
 
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+generateBtn.addEventListener("click", passwordOptions);
 
 
 // Generate the password
-var password = " ";
-for (var i = 0; i < passwordLength; i++) {
-  var randomCharacterSet = userSelections[Math.floor(Math.random() * userSelections.length)];
-  var randomCharacter = randomCharacterSet[Math.floor(Math.random() * randomCharacterSet.length)];
+function generatePassword() {
+let password = "";
 
-  password += randomCharacter;
+const lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+const upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+const specialCharacters = ["@", "$", "*", "!", "%", "&", "#", "?", ">", ".", "=", "+", "(", "-", ")", "<", "/", "\\", ";", "[", "]", ":", "{", "}", "|", "“", "’", "_"];
+const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+let result = lowerCase.concat(" ", upperCase, " ", specialCharacters, " ", numbers);
+
+// var randomCharacter = randomCharacterSet[Math.floor(Math.random() * randomCharacterSet.length)];
+  // for(var i = 0; i < passwordLength; i++) {
+function generatePassword() {
+  let password = "";
+  password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+  password += upperCase[Math.floor(Math.random() * upperCase.length)];
+  password += specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
+  password += numbers[Math.floor(Math.random() * numbers.length)];
+  
+  while(length > password.length){
+    password += result[Math.floor(Math.random() * result.length)];
+  }
+  passwordBox.value = password;
+   password += lowerCase;
+   password += upperCase;
+   password += specialCharacters;
+   password += numbers;
+
+  }
+
+
+   return password;
 }
-
-return password;
-};
